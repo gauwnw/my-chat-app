@@ -1,28 +1,68 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>My Chat App</title>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form id="form" action="" style="position: fixed; bottom: 0; width: 100%; display: flex;">
-      <input id="input" autocomplete="off" style="flex-grow: 1;" /><button>전송</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-      var form = document.getElementById('form');
-      var input = document.getElementById('input');
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (input.value) { socket.emit('chat message', input.value); input.value = ''; }
-      });
-      socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
-        item.textContent = msg;
-        document.getElementById('messages').appendChild(item);
-      });
-    </script>
-  </body>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Times; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">cat &lt;&lt;EOF &gt; index.html</p>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="utf-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;내 멋진 채팅방&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: sans-serif; background: #b2c7da; margin: 0; padding: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#chat { max-width: 500px; margin: auto; background: white; border-radius: 10px; height: 80vh; display: flex; flex-direction: column; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#messages { flex-grow: 1; overflow-y: auto; list-style: none; padding: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#messages li { margin-bottom: 10px; padding: 8px; background: #eee; border-radius: 5px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#form { display: flex; padding: 10px; border-top: 1px solid #ddd; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#input { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button { padding: 10px 20px; background: #fee500; border: none; margin-left: 5px; cursor: pointer; border-radius: 5px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="chat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;ul id="messages"&gt;&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;form id="form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input id="nickname" placeholder="닉네임" style="width: 80px; margin-right: 5px; padding: 5px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input id="input" autocomplete="off" placeholder="메시지를 입력하세요..." /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button&gt;전송&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var socket = io();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var form = document.getElementById('form');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var input = document.getElementById('input');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var nickname = document.getElementById('nickname');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>form.addEventListener('submit', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>var name = nickname.value || '익명';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (input.value) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>socket.emit('chat message', name + ': ' + input.value);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>input.value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>socket.on('chat message', function(msg) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>var item = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.textContent = msg;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('messages').appendChild(item);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+<p class="p1">EOF</p>
+</body>
 </html>
