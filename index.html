@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul id="messages"&gt;&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;form id="form" action=""&gt;&lt;input id="input" /&gt;&lt;button&gt;전송&lt;/button&gt;&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var socket = io();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var form = document.getElementById('form');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var input = document.getElementById('input');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>form.addEventListener('submit', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (input.value) { socket.emit('chat message', input.value); input.value = ''; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>socket.on('chat message', function(msg) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var item = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>item.textContent = msg;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('messages').appendChild(item);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
